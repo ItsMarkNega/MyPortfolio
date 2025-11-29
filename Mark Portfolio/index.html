@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mark Earon Fajardo - Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Updated to coffee-inspired color palette */
+            --primary: #2C1810;
+            --secondary: #3D2817;
+            --accent: #D4A574;
+            --dark: #F5F1E8;
+            --white: #E8DCC8;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--secondary);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--primary);
+            padding: 1.5rem;
+            border-bottom: 3px solid var(--accent);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            border: 2px solid var(--accent);
+            padding: 0.5rem 1rem;
+            background-color: var(--secondary);
+            color: var(--accent);
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-size: 1.1rem;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 0.2rem;
+            cursor: pointer;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Contact Page */
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-card {
+            background-color: var(--primary);
+            border: 3px solid var(--accent);
+            padding: 2rem;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            background-color: var(--secondary);
+        }
+
+        .contact-card h3 {
+            font-size: 1.3rem;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 0.5rem;
+            color: var(--accent);
+        }
+
+        .contact-card p {
+            text-align: center;
+            color: var(--dark);
+        }
+
+        .contact-card a {
+            margin-top: 1rem;
+            padding: 0.5rem 1.5rem;
+            background-color: var(--accent);
+            color: var(--secondary);
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .contact-card a:hover {
+            background-color: #1E90FF;
+        }
+
+        /* About Page */
+        /* Updated to use flexbox layout for profile image and text side-by-side */
+        .about-hero {
+            background-color: var(--primary);
+            border: 3px solid var(--accent);
+            padding: 3rem;
+            margin-bottom: 3rem;
+            border-radius: 8px;
+            display: flex;
+            gap: 3rem;
+            align-items: flex-start;
+        }
+
+        .about-text {
+            flex: 1;
+            text-align: left;
+        }
+
+        .about-text h1 {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.5px;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            color: var(--dark);
+            line-height: 1.8;
+        }
+
+        .about-image {
+            flex: 0 0 280px;
+            min-width: 250px;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            border: 3px solid var(--accent);
+            object-fit: cover;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Hobbies Section */
+        .section-title {
+            font-size: 2rem;
+            color: var(--accent);
+            margin: 2rem 0 1.5rem;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 0.5rem;
+        }
+
+        .hobbies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .hobby-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .hobby-image-container {
+            background-color: var(--primary);
+            border: 3px solid var(--accent);
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .hobby-image-container:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(15, 127, 255, 0.3);
+        }
+
+        .hobby-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hobby-description {
+            text-align: center;
+            font-weight: 500;
+            color: var(--dark);
+            padding: 0.5rem 0;
+        }
+
+        /* Skills Section */
+        .skills-container {
+            background-color: var(--primary);
+            border: 3px solid var(--accent);
+            padding: 2rem;
+            border-radius: 8px;
+        }
+
+        .skill-item {
+            margin-bottom: 2rem;
+        }
+
+        .skill-item h3 {
+            font-size: 1.3rem;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-description {
+            color: var(--dark);
+            line-height: 1.8;
+            margin-left: 1rem;
+        }
+
+        .skill-bar {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+            margin-left: 1rem;
+        }
+
+        .skill-dot {
+            width: 12px;
+            height: 12px;
+            background-color: var(--accent);
+            border-radius: 50%;
+        }
+
+        /* Portfolio Page */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .portfolio-item {
+            background-color: var(--primary);
+            border: 3px solid var(--accent);
+            padding: 2rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .portfolio-item:hover {
+            background-color: var(--secondary);
+            transform: translateY(-5px);
+        }
+
+        .portfolio-item h3 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .portfolio-item p {
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        /* Button */
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background-color: var(--accent);
+            color: var(--secondary);
+            text-decoration: none;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background-color: #1E90FF;
+        }
+
+        .btn-outlined {
+            background-color: transparent;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+        }
+
+        .btn-outlined:hover {
+            background-color: var(--accent);
+            color: var(--secondary);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            border-top: 3px solid var(--accent);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+            color: var(--dark);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            /* Stack profile image and text vertically on mobile */
+            .about-hero {
+                flex-direction: column;
+            }
+
+            .about-text h1 {
+                font-size: 2rem;
+            }
+
+            .about-image {
+                flex: 0 0 auto;
+                min-width: auto;
+                max-width: 100%;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">@Mark</div>
+        <nav>
+            <a onclick="showPage('about')">About</a>
+            <a onclick="showPage('portfolio')">Portfolio</a>
+            <a onclick="showPage('contact')">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- About Page -->
+        <div id="about" class="page active">
+            <!-- Added profile image beside About Me section -->
+            <div class="about-hero">
+                <div class="about-text">
+                    <h1>About Me</h1>
+                    <p>Hi, I'm Mark Earon Fajardo, A passionate developer and designer with over three years of hands-on experience shaped by my journey in BS Information Technology. Throughout my college years, I’ve worked on a variety of projects that strengthened my skills in both software development and UI/UX design. I enjoy creating practical, user-centered solutions while continuously learning new tools, technologies, and design approaches. My goal is to build digital experiences that are not only functional but also visually engaging and intuitive.</p>
+                </div>
+                <div class="about-image">
+                    <img src="public/images/profile.jpg" alt="Mark Earon Fajardo">
+                </div>
+            </div>
+
+            <h2 class="section-title">Hobbies</h2>
+            <div class="hobbies-grid">
+                <!-- Changed structure to show description text below images -->
+                <div class="hobby-wrapper">
+                    <div class="hobby-image-container">
+                        <img src="public/images/ml.jpg" alt="Gaming - Mobile Legends">
+                    </div>
+                    <div class="hobby-description">Gaming</div>
+                </div>
+                <div class="hobby-wrapper">
+                    <div class="hobby-image-container">
+                        <img src="public/images/Reading.jpg" alt="Reading - One Piece">
+                    </div>
+                    <div class="hobby-description">Reading</div>
+                </div>
+                <div class="hobby-wrapper">
+                    <div class="hobby-image-container">
+                        <img src="public/images/music.jpg" alt="Music - Spotify">
+                    </div>
+                    <div class="hobby-description">Music</div>
+                </div>
+            </div>
+
+            <h2 class="section-title">Skills</h2>
+            <div class="skills-container">
+                <div class="skill-item">
+                    <h3>Programming</h3>
+                    <p class="skill-description">
+                        Proficient in multiple programming languages and frameworks. I've developed various projects ranging from web applications to system utilities during my college years.
+                    </p>
+                    <div class="skill-bar">
+                        <div class="skill-dot"></div>
+                        <div class="skill-dot"></div>
+                        <div class="skill-dot"></div>
+                        <div class="skill-dot"></div>
+                        <div class="skill-dot"></div>
+                    </div>
+                </div>
+
+                <div class="skill-item">
+                    <h3>Networking</h3>
+                    <p class="skill-description">
+                        Strong understanding of network protocols, infrastructure, and system administration. Experience with various networking tools and technologies.
+                    </p>
+                    <div class="skill-bar">
+                        <div class="skill-dot"></div>
+                        <div class="skill-dot"></div>
+                        <div class="skill-dot"></div>
+                        <div class="skill-dot"></div>
+                    </div>
+                </div>
+
+                <div class="skill-item">
+                    <h3>Graphic Design</h3>
+                    <p class="skill-description">
+                        Creative design skills with experience in UI/UX design, branding, and visual communications. I enjoy creating visually appealing and user-friendly designs.
+                    </p>
+                    <div class="skill-bar">
+                        <div class="skill-dot"></div>
+                        <div class="skill-dot"></div>
+                        <div class="skill-dot"></div>
+                        <div class="skill-dot"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Portfolio Page -->
+        <div id="portfolio" class="page">
+            <h1 class="section-title">My Portfolio</h1>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <h3>Object Oriented Programming</h3>
+                    <p>I successfully accomplished my study of Object-Oriented Programming, gaining a strong understanding of its core principles and practical applications.</p>
+                </div>
+
+                <div class="portfolio-item">
+                    <h3>Web Developer</h3>
+                    <p>I accomplished Object-Oriented Programming during my second year as a Web Developer, gaining a strong understanding of its core concepts and how to apply them in real projects.</p>
+                </div>
+
+                <div class="portfolio-item">
+                    <h3>Networking</h3>
+                    <p>Throughout my three years in college, I gained a lot of knowledge in Networking and developed both basic and intermediate-level skills.</p>
+                </div>
+
+                <div class="portfolio-item">
+                    <h3>Graphic Design</h3>
+                    <p>During my college years, I built a strong foundation in Graphic Design, learning essential principles and applying them in various creative projects.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Page -->
+        <div id="contact" class="page">
+            <h1 class="section-title">Get in Touch</h1>
+            <div class="contact-container">
+                <div class="contact-card">
+                    <h3>Facebook</h3>
+                    <p>Mark Earon Fajardo</p>
+                    <p style="font-size: 0.9rem; color: var(--accent);">Connect with me on Facebook</p>
+                    <a href="https://www.facebook.com/share/16DKy5tBRg/" target="_blank">Visit Profile</a>
+                </div>
+
+                <div class="contact-card">
+                    <h3>Gmail</h3>
+                    <p>markearon1015@gmail.com</p>
+                    <p style="font-size: 0.9rem; color: var(--accent);">Send me an email</p>
+                    <a href="mailto:markearon1015@gmail.com">Send Email</a>
+                </div>
+
+                <div class="contact-card">
+                    <h3>GitHub</h3>
+                    <p>itsmarkrnega.git</p>
+                    <p style="font-size: 0.9rem; color: var(--accent);">Check my code projects</p>
+                    <a href="https://github.com/ItsMarkNega " target="_blank">View Profile</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Mark Earon Fajardo. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function showPage(pageName) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+
+            // Show selected page
+            document.getElementById(pageName).classList.add('active');
+        }
+    </script>
+</body>
+</html>
